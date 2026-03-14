@@ -1,0 +1,134 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.statusPills {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusPills span {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 0.2rem 0.55rem;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.section {
+  scroll-margin-top: calc(var(--header-height) + var(--ticker-height) + 16px);
+}
+
+.modulesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.moduleCard {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: rgba(10, 17, 31, 0.75);
+  padding: var(--space-lg);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.moduleCard h3 {
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.moduleCard p {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.moduleCard:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+}
+
+.insightModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 5, 10, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: var(--space-md);
+}
+
+.insightCard {
+  width: min(780px, 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: rgba(8, 13, 24, 0.95);
+  padding: var(--space-lg);
+}
+
+.insightCard h3 {
+  margin-bottom: 0.4rem;
+}
+
+.insightMeta {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  margin-bottom: var(--space-md);
+}
+
+.insightSection {
+  margin-top: var(--space-md);
+}
+
+.insightSection h4 {
+  font-size: 0.84rem;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  margin-bottom: 0.35rem;
+  color: var(--accent-cyan);
+}
+
+.insightSection ul {
+  margin-left: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.insightActions {
+  margin-top: var(--space-lg);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.insightActions button {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.75rem;
+  color: var(--accent-cyan);
+}
+
+@media (max-width: 1020px) {
+  .modulesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .modulesGrid {
+    grid-template-columns: 1fr;
+  }
+}

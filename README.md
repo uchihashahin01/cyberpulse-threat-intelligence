@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CyberPulse Threat Intelligence Hub
 
-## Getting Started
+CyberPulse is a modern cybersecurity intelligence portal built with Next.js App Router and TypeScript. It blends live threat news, analyst workflows, and modular intelligence views into a clean multi-page experience.
 
-First, run the development server:
+## Highlights
+
+- Live + fallback intelligence pipeline:
+	- GNews API ingestion
+	- Curated cybersecurity RSS aggregation
+	- Automatic mock-data fallback for resilience
+- Multi-page intelligence modules:
+	- Dashboard
+	- Threat Map
+	- CVE Explorer
+	- Source Credibility
+	- Incident Timeline
+	- Alerts
+	- Account
+	- Admin (role-guarded)
+- Analyst-grade UX:
+	- Animated active navigation
+	- Page-level breadcrumbs
+	- Search-driven feed filtering
+	- Bookmark persistence per local account
+	- AI-style incident summary modal with IOC/mitigation hints
+- Performance and quality:
+	- Next Image optimization (with robust remote host patterns)
+	- Typed domain models and utilities
+	- Lint + production build verified
+
+## Stack
+
+- Next.js 16 (App Router)
+- TypeScript
+- CSS Modules + global design tokens
+- Lucide React
+- fast-xml-parser
+
+## Local Development
+
+1. Install dependencies.
+
+```bash
+npm install
+```
+
+2. Create environment file.
+
+```bash
+cp .env.example .env.local
+```
+
+3. Add your API key.
+
+```env
+GNEWS_API_KEY=your_gnews_api_key
+```
+
+4. Start development server.
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Build for production check.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## News API Route
 
-## Learn More
+Endpoint:
 
-To learn more about Next.js, take a look at the following resources:
+- GET /api/news
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Query parameters:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- category: all, malware, data-breach, vulnerability, ransomware, phishing, apt, privacy, general
+- search: free-text search
+- limit: 1-50 (default 24)
 
-## Deploy on Vercel
+Example:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+curl "http://localhost:3000/api/news?category=malware&search=linux&limit=12"
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Admin Access Model
+
+- The Account module controls role state in local storage.
+- Admin route protection is enforced in UI flow:
+	- Admin nav/module visibility is hidden for non-admin users.
+	- Direct access to /admin redirects non-admin users to /account.
+
+## Deploying to GitHub Pages
+
+This repository includes a GitHub Actions workflow at:
+
+- .github/workflows/deploy-pages.yml
+
+How it works:
+
+1. Push to main.
+2. Workflow builds a static export and deploys it to GitHub Pages.
+3. The site is published from the out artifact.
+
+Static deployment mode notes:
+
+- GitHub Pages is static hosting, so deployment runs in static-export mode.
+- In static-export mode, the dashboard uses bundled mock intelligence when server APIs are unavailable.
+- Local development and standard server deployments still support live API route behavior.
+
+## Suggested Repository Name
+
+- cyberpulse-threat-intelligence
+
+## License
+
+Use and adapt for educational and portfolio purposes.
